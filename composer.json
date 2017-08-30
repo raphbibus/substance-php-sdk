@@ -1,0 +1,23 @@
+{
+    "name": "rakete7/substance-php-sdk",
+    "description": "A simple PHP SDK to integrate the Physical Web platform Substance into any PHP project.",
+    "type": "library",
+    "license": "Rakete 7",
+    "authors": [
+        {
+            "name": "Ralph Cibis",
+            "email": "ralph.cibis@rakete7.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "~6.0",
+        "nesbot/carbon": "^1.23@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Substance\\": "src/"
+        }
+    }
+}
