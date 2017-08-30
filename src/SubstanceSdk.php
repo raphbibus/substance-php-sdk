@@ -2,7 +2,8 @@
 
 namespace Substance;
 
-use SubstanceConstants;
+use Substance\SubstanceConstants;
+use Substance\AvailableBeacons;
 use Substance\Auth\AppAuthentication;
 
 class SubstanceSdk {
@@ -23,8 +24,15 @@ class SubstanceSdk {
         $this->appAuthentication = new AppAuthentication($this->appKey,$this->appSecret);
 
         $token = $this->appAuthentication->getToken();
+        //
+        // return $token;
 
-        echo $token;
+    }
+
+    public function getBeacons() {
+
+        $availableBeacons = new AvailableBeacons();
+        return $availableBeacons->get($this->appAuthentication->getToken());
 
     }
 

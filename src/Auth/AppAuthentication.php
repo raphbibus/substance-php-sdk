@@ -15,6 +15,8 @@ class AppAuthentication {
     private $appKey;
     private $appSecret;
 
+    private $authenticated = false;
+
     public function __construct($appKey, $appSecret) {
 
         $this->setAppKey($appKey);
@@ -53,15 +55,21 @@ class AppAuthentication {
         if($response->getStatusCode() != 201) {
 
             $data = $this->decodeBody($response);
+            $this->authenticated = false;
             throw new AppAuthenticationFailedException($data->message,$response->getStatusCode());
 
         } else {
 
             $data = $this->decodeBody($response);
             $this->token = $data->data->token;
+            $this->authenticated = true;
 
         }
 
+    }
+
+    public function isAuthenticated() {
+        return $this->authenticated;
     }
 
     private function decodeBody($response) {
