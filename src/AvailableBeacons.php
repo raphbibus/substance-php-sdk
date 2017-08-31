@@ -2,20 +2,26 @@
 
 namespace Substance;
 
-use GuzzleHttp\Client;
 use Substance\SubstanceConstants;
+use Substance\Models\Beacon;
+use Substance\Traits\GetsHttpClient;
 
 class AvailableBeacons {
 
+    use GetsHttpClient;
+
+    /**
+    * @var      array       $beacons
+    */
+    private $beacons = [];
+
+    /**
+    * @param    string      $token      JWT bearer token in the form of "Bearer {token}"
+    * @return   Collection              collection object of beacons
+    */
     public function get($token) {
 
-        $client = new Client([
-            'base_uri' => SubstanceConstants::getSubstanceApiUrl(),
-            'timeout' => 10.0,
-            'headers' => [
-                'Authorization' => $token
-            ]
-        ]);
+        $client = $this->getClient(null,$token);
 
         $response = $client->request('GET', SubstanceConstants::getAvailableBeaconsUrl());
 
@@ -25,11 +31,13 @@ class AvailableBeacons {
 
             $data = json_decode($body->getContents());
 
-            return collect($data->data);
+            foreach($data->data as $payloadItem) {
+                $this->beacons[] = new Beacon($payloadItem);
+            }
 
         }
 
-        return null;
+        return collect($this->beacons);
 
     }
 

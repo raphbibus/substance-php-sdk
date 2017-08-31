@@ -7,8 +7,11 @@ use Substance\SubstanceConstants;
 use Substance\Exceptions\AppKeyValidationException;
 use Substance\Exceptions\AppSecretValidationException;
 use Substance\Exceptions\AppAuthenticationFailedException;
+use Substance\Traits\GetsHttpClient;
 
 class AppAuthentication {
+
+    use GetsHttpClient;
 
     private $token;
 
@@ -35,36 +38,24 @@ class AppAuthentication {
 
     public function login() {
 
-        $client = new Client([
-            'base_uri' => SubstanceConstants::getSubstanceApiUrl(),
-            'timeout' => 10.0,
-            'headers' => [
-                'Content-Type' => 'application/json'
-            ]
-        ]);
+        $client = $this->getClient('application/json');
 
         $payload = [
             'key' => $this->appKey,
             'secret' => $this->appSecret
         ];
 
-        $response = $client->request('POST', SubstanceConstants::getAuthUrl(), [
-            'json' => $payload
-        ]);
-        //TODO: catch guzzle exception GuzzleHttp\Exception\ClientException
-        if($response->getStatusCode() != 201) {
-
-            $data = $this->decodeBody($response);
-            $this->authenticated = false;
-            throw new AppAuthenticationFailedException($data->message,$response->getStatusCode());
-
-        } else {
-
-            $data = $this->decodeBody($response);
-            $this->token = $data->data->token;
-            $this->authenticated = true;
-
+        try {
+            $response = $client->request('POST', SubstanceConstants::getAuthUrl(), [
+                'json' => $payload
+            ]);
+        } catch(\Exception $e) {
+            throw new AppAuthenticationFailedException($e->getMessage(),$e->getCode());
         }
+
+        $data = $this->decodeBody($response);
+        $this->token = $data->data->token;
+        $this->authenticated = true;
 
     }
 
