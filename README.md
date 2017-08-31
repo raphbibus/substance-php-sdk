@@ -11,13 +11,12 @@ require_once __DIR__ . '/vendor/autoload.php'; // Autoload files using Composer 
 
 use Substance\SubstanceSdk;
 
-$substance = new SubstanceSdk("8991544805321d10cbe97e602a88aa8ef5e91969","a5002dbef6e6dc0597ba1e5657e9e5cec1e66887");
+$substance = new SubstanceSdk("8901544805321d10cbe97e602a88aa8ef5e91970","a5102dbef6e6dc0597ba1e5657e9e5cec1e66898");
 
 $substance->auth();
 
 $beacons = $substance->getBeacons();
 
-// var_dump($beacons);
 
 $updatedBeacon = $substance->connectContent($beacons->random(),"https://www.rakete7.com","Rakete 7 Website","Hab ich mit dem SDK erstellt!");
 
