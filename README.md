@@ -5,6 +5,8 @@ PHP SDK to integrate Substance in CMS systems
 
 ```php
 
+<?php
+
 require_once __DIR__ . '/vendor/autoload.php'; // Autoload files using Composer autoload
 
 use Substance\SubstanceSdk;
@@ -24,5 +26,3 @@ echo "connected beacon";
 $updatedBeacon = $substance->disconnectContent($updatedBeacon);
 
 echo "disconnected beacon";
-
-```
