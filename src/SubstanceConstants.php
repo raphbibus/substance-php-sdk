@@ -12,6 +12,10 @@ class SubstanceConstants {
 
     const AVAILABLE_BEACONS_NAMESPACE = "sdk/beacons";
 
+    const CONNECT_BEACON_NAMESPACE = "sdk/beacons/connect";
+
+    const DISCONNECT_BEACON_NAMESPACE = "sdk/beacons/disconnect";
+
     public static function getSubstanceApiUrl() {
         return self::SUBSTANCE_API_URL;
     }
@@ -22,6 +26,14 @@ class SubstanceConstants {
 
     public static function getAvailableBeaconsUrl() {
         return self::AVAILABLE_BEACONS_NAMESPACE;
+    }
+
+    public static function getConnectBeaconUrl() {
+        return self::CONNECT_BEACON_NAMESPACE;
+    }
+
+    public static function getDisonnectBeaconUrl() {
+        return self::DISCONNECT_BEACON_NAMESPACE;
     }
 
 }

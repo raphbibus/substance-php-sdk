@@ -20,7 +20,7 @@ class AppAuthentication {
 
     private $authenticated = false;
 
-    public function __construct($appKey, $appSecret) {
+    public function __construct(string $appKey, string $appSecret) {
 
         $this->setAppKey($appKey);
         $this->setAppSecret($appSecret);
@@ -72,20 +72,20 @@ class AppAuthentication {
 
     private function setAppKey(string $appKey) {
 
-        if(strlen($appKey) != 40) {
-            throw new AppKeyValidationException();
-        } else {
+        if(strlen($appKey) == 40) {
             $this->appKey = $appKey;
+        } else {
+            throw new AppKeyValidationException();
         }
 
     }
 
     private function setAppSecret(string $appSecret) {
 
-        if(strlen($appSecret) != 40) {
-            throw new AppSecretValidationException();
-        } else {
+        if(strlen($appSecret) == 40) {
             $this->appSecret = $appSecret;
+        } else {
+            throw new AppSecretValidationException();
         }
 
     }

@@ -18,6 +18,12 @@ class Beacon {
 
     }
 
+    public function toPayload() {
+        return [
+            'beacon_id' => $this->id
+        ];
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -32,6 +38,10 @@ class Beacon {
 
     public function getConnected() {
         return $this->connected;
+    }
+
+    public function setConnected(boolean $connected) {
+        $this->connected = $connected;
     }
 
 }

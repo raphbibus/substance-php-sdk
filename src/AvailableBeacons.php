@@ -16,10 +16,15 @@ class AvailableBeacons {
     private $beacons = [];
 
     /**
+    * @var      Collection  $beaconCollection
+    */
+    private $beaconCollection;
+
+    /**
     * @param    string      $token      JWT bearer token in the form of "Bearer {token}"
     * @return   Collection              collection object of beacons
     */
-    public function get($token) {
+    public function get(string $token) {
 
         $client = $this->getClient(null,$token);
 
@@ -37,7 +42,8 @@ class AvailableBeacons {
 
         }
 
-        return collect($this->beacons);
+        $this->beaconCollection = collect($this->beacons);
+        return $this->beaconCollection;
 
     }
 
