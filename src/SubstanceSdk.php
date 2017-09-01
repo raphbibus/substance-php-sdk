@@ -6,6 +6,7 @@ use Substance\SubstanceConstants;
 use Substance\Requests\AvailableBeacons;
 use Substance\Requests\SubstanceConnector;
 use Substance\Models\Beacon;
+use Substance\Models\Content;
 use Substance\Models\ContentConnection;
 use Substance\Requests\Auth\AppAuthentication;
 
@@ -70,15 +71,11 @@ class SubstanceSdk {
 
     /**
      * Connect a beacon with content
-     * @param  Substance\Models\Beacon  $beacon         Beacon to be connected to given URL
-     * @param  string                   $url            The URL that gets connected to the beacon, HTTPS preferred
-     * @param  string                   $title          The notification title for the Physical Web
- * @param  string                       $description    The notification description for the Phyiscal Web
-     * @return Substance\Models\Beacon                  The updated (connected) beacon
+     * @param  Substance\Models\ContentConnection   $contentConnection  The content and beacon connection to be created in Substance
+     * @return Substance\Models\Beacon                                  The updated (connected) beacon
      */
-    public function connectContent(Beacon $beacon,string $url,string $title,string $description) {
+    public function connectContent(ContentConnection $contentConnection) {
 
-        $contentConnection = new ContentConnection($beacon,$url,$title,$description);
         $substanceConnector = new SubstanceConnector();
         return $substanceConnector->connect($contentConnection,$this->appAuthentication->getToken());
 
