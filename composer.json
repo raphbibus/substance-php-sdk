@@ -14,7 +14,7 @@
         "php": ">=7.0.0",
         "guzzlehttp/guzzle": "~6.0",
         "nesbot/carbon": "^1.23@dev",
-        "tightenco/collect": "dev-master"
+        "tightenco/collect": "^5.4"
     },
     "autoload": {
         "psr-4": {
