@@ -11,24 +11,31 @@ class AvailableBeacons {
     use GetsHttpClient;
 
     /**
-    * @var      array       $beacons
-    */
+     * Array of available beacons
+     * @var array $beacons
+     */
     private $beacons = [];
 
     /**
-    * @var      Collection  $beaconCollection
-    */
+     * Collection of available beacons
+     * @var Collection $beaconCollection
+     */
     private $beaconCollection;
 
     /**
-    * @param    string      $token      JWT bearer token in the form of "Bearer {token}"
-    * @return   Collection              collection object of beacons
-    */
+     * Get available beacons from Substance backend
+     * @param    string      $token      JWT bearer token in the form of "Bearer {token}"
+     * @return   Collection              collection object of beacons
+     */
     public function get(string $token) {
 
         $client = $this->getClient(null,$token);
 
-        $response = $client->request('GET', SubstanceConstants::getAvailableBeaconsUrl());
+        try {
+            $response = $client->request('GET', SubstanceConstants::getAvailableBeaconsUrl());
+        } catch(\Exception $e) {
+            throw new AvailableBeaconsFailedException($e->getMessage(),$e->getCode());
+        }
 
         if($response->getStatusCode() == 200) {
 
