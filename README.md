@@ -25,9 +25,6 @@ $updatedBeacon = $substance->connectContent($beacon,"https://www.rakete7.com","R
 
 echo "connected beacon\n";
 
-echo "sleepting for 15 seconds\n";
-sleep(15);
-
 $updatedBeacon = $substance->disconnectContent($updatedBeacon);
 
 echo "disconnected beacon\n";
