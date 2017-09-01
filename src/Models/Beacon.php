@@ -4,11 +4,34 @@ namespace Substance\Models;
 
 class Beacon {
 
+    /**
+     * Beacon ID
+     * @var string
+     */
     private $id;
+
+    /**
+     * Beacon name
+     * @var string
+     */
     private $name;
+
+    /**
+     * Beacon alias
+     * @var string
+     */
     private $alias;
+
+    /**
+     * Connected with content status
+     * @var boolean
+     */
     private $connected;
 
+    /**
+     * Create a new Beacon instance
+     * @param object $payloadItem one item of AvailableBeacons beaconCollection
+     */
     public function __construct($payloadItem) {
 
         $this->id = $payloadItem->id;
@@ -18,6 +41,10 @@ class Beacon {
 
     }
 
+    /**
+     * Transform object to required payload for HTTP requests against Substance backend
+     * @return array jsonable payload
+     */
     public function toPayload() {
         return [
             'beacon_id' => $this->id

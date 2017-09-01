@@ -1,10 +1,11 @@
 <?php
 
-namespace Substance;
+namespace Substance\Requests;
 
 use Substance\SubstanceConstants;
 use Substance\Models\Beacon;
 use Substance\Traits\GetsHttpClient;
+use Substance\Exceptions\AvailableBeaconsFailedException;
 
 class AvailableBeacons {
 
@@ -12,20 +13,20 @@ class AvailableBeacons {
 
     /**
      * Array of available beacons
-     * @var array $beacons
+     * @var array
      */
     private $beacons = [];
 
     /**
      * Collection of available beacons
-     * @var Collection $beaconCollection
+     * @var Collection
      */
     private $beaconCollection;
 
     /**
      * Get available beacons from Substance backend
-     * @param    string      $token      JWT bearer token in the form of "Bearer {token}"
-     * @return   Collection              collection object of beacons
+     * @param  string $token     JWT bearer token in the form of "Bearer {token}"
+     * @return Collection        object of beacons
      */
     public function get(string $token) {
 

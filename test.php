@@ -10,12 +10,17 @@ $substance->auth();
 
 $beacons = $substance->getBeacons();
 
-// var_dump($beacons);
+$beacon = $beacons->random();
+echo $beacon->getName()."\n";
+echo $beacon->getAlias()."\n";
 
-$updatedBeacon = $substance->connectContent($beacons->random(),"https://www.rakete7.com","Rakete 7 Website","Hab ich mit dem SDK erstellt!");
+$updatedBeacon = $substance->connectContent($beacon,"https://www.rakete7.com","Rakete 7 Website","Hab ich mit dem SDK erstellt!");
 
-echo "connected beacon";
+echo "connected beacon\n";
+
+echo "sleepting for 15 seconds\n";
+sleep(15);
 
 $updatedBeacon = $substance->disconnectContent($updatedBeacon);
 
-echo "disconnected beacon";
+echo "disconnected beacon\n";

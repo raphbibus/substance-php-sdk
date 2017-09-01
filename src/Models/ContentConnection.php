@@ -9,11 +9,37 @@ use Substance\Exceptions\DescriptionValidationException;
 
 class ContentConnection {
 
+    /**
+     * Connectable beacon
+     * @var Substance\Models\Beacon
+     */
     private $beacon;
+
+    /**
+     * Content URL that gets connected to the beacon
+     * @var string
+     */
     private $url;
+
+    /**
+     * Notification title
+     * @var string
+     */
     private $title;
+
+    /**
+     * Notification description
+     * @var string
+     */
     private $description;
 
+    /**
+     * Create a new ContentConnection instance
+     * @param Beacon $beacon      Connectable beacon
+     * @param string $url         Content URL that gets connected to the beacon
+     * @param string $title       Notification title
+     * @param string $description Notification description
+     */
     public function __construct(Beacon $beacon,string $url,string $title,string $description) {
 
         $this->setBeacon($beacon);
@@ -23,6 +49,10 @@ class ContentConnection {
 
     }
 
+    /**
+     * Transform object to required payload for HTTP requests against Substance backend
+     * @return array jsonable payload
+     */
     public function toPayload() {
         return [
             'beacon_id' => $this->beacon->getId(),

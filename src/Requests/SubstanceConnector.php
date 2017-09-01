@@ -1,6 +1,6 @@
 <?php
 
-namespace Substance;
+namespace Substance\Requests;
 
 use Substance\SubstanceConstants;
 use Substance\Models\ContentConnection;
@@ -16,10 +16,11 @@ class SubstanceConnector {
     public function __construct() {}
 
     /**
-    * @param    ContentConnection $contentConnection    A contentConnection object
-    * @param    string            $token                JWT bearer token in the form of "Bearer {token}"
-    * @return   Beacon                                  The updated beacon
-    */
+     * Connect a URL and a beacon in Substance
+     * @param    ContentConnection $contentConnection    A contentConnection object
+     * @param    string            $token                JWT bearer token in the form of "Bearer {token}"
+     * @return   Beacon                                  The updated beacon
+     */
     public function connect(ContentConnection $contentConnection, string $token) {
 
         $client = $this->getClient('application/json',$token);
@@ -45,6 +46,12 @@ class SubstanceConnector {
 
     }
 
+    /**
+     * Disconnect a beacon from any content in Substance
+     * @param    Beacon            $beacon      Beacon to disconnect
+     * @param    string            $token       JWT bearer token in the form of "Bearer {token}"
+     * @return   Beacon                         The updated beacon
+     */
     public function disconnect(Beacon $beacon, string $token) {
 
         $client = $this->getClient('application/json',$token);

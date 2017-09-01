@@ -7,6 +7,12 @@ use Substance\SubstanceConstants;
 
 trait GetsHttpClient {
 
+    /**
+     * Get a HTTP client for Substance backend
+     * @param  string $contentType Content-Type for POST requests
+     * @param  string $token       JWT token
+     * @return GuzzleHttp\Client   Guzzle HTTP Client
+     */
     protected function getClient($contentType = null, $token = null) {
 
         $headers = [];
