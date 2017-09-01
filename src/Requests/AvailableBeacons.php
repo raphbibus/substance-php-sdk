@@ -4,12 +4,9 @@ namespace Substance\Requests;
 
 use Substance\SubstanceConstants;
 use Substance\Models\Beacon;
-use Substance\Traits\GetsHttpClient;
-use Substance\Exceptions\AvailableBeaconsFailedException;
+use Substance\Requests\SubstanceRequest;
 
-class AvailableBeacons {
-
-    use GetsHttpClient;
+class AvailableBeacons extends SubstanceRequest {
 
     /**
      * Array of available beacons
@@ -32,22 +29,12 @@ class AvailableBeacons {
 
         $client = $this->getClient(null,$token);
 
-        try {
-            $response = $client->request('GET', SubstanceConstants::getAvailableBeaconsUrl());
-        } catch(\Exception $e) {
-            throw new AvailableBeaconsFailedException($e->getMessage(),$e->getCode());
-        }
+        $response = $this->getEndpointResponse($client,'GET',SubstanceConstants::getAvailableBeaconsUrl(),'Substance\Exceptions\AvailableBeaconsFailedException');
 
-        if($response->getStatusCode() == 200) {
+        $data = $this->decodeBody($response);
 
-            $body = $response->getBody();
-
-            $data = json_decode($body->getContents());
-
-            foreach($data->data as $payloadItem) {
-                $this->beacons[] = new Beacon($payloadItem);
-            }
-
+        foreach($data->data as $payloadItem) {
+            $this->beacons[] = new Beacon($payloadItem);
         }
 
         $this->beaconCollection = collect($this->beacons);

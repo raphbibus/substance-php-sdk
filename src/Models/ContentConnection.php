@@ -35,10 +35,10 @@ class ContentConnection {
 
     /**
      * Create a new ContentConnection instance
-     * @param Beacon $beacon      Connectable beacon
-     * @param string $url         Content URL that gets connected to the beacon
-     * @param string $title       Notification title
-     * @param string $description Notification description
+     * @param   Substance\Models\Beacon     $beacon      Connectable beacon
+     * @param   string                      $url         Content URL that gets connected to the beacon
+     * @param   string                      $title       Notification title
+     * @param   string                      $description Notification description
      */
     public function __construct(Beacon $beacon,string $url,string $title,string $description) {
 
@@ -51,7 +51,7 @@ class ContentConnection {
 
     /**
      * Transform object to required payload for HTTP requests against Substance backend
-     * @return array jsonable payload
+     * @return  array   jsonable payload
      */
     public function toPayload() {
         return [

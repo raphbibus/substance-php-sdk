@@ -30,7 +30,7 @@ class Beacon {
 
     /**
      * Create a new Beacon instance
-     * @param object $payloadItem one item of AvailableBeacons beaconCollection
+     * @param   object  $payloadItem one item of AvailableBeacons beaconCollection
      */
     public function __construct($payloadItem) {
 
@@ -43,7 +43,7 @@ class Beacon {
 
     /**
      * Transform object to required payload for HTTP requests against Substance backend
-     * @return array jsonable payload
+     * @return  array   jsonable payload
      */
     public function toPayload() {
         return [

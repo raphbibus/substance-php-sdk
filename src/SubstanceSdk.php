@@ -7,7 +7,7 @@ use Substance\Requests\AvailableBeacons;
 use Substance\Requests\SubstanceConnector;
 use Substance\Models\Beacon;
 use Substance\Models\ContentConnection;
-use Substance\Auth\AppAuthentication;
+use Substance\Requests\Auth\AppAuthentication;
 
 class SubstanceSdk {
 
@@ -37,8 +37,8 @@ class SubstanceSdk {
 
     /**
      * Create a new Substance SDK instance
-     * @param string $appKey    Substance app key
-     * @param string $appSecret Substance app secret
+     * @param   string  $appKey     Substance app key
+     * @param   string  $appSecret  Substance app secret
      */
     public function __construct(string $appKey, string $appSecret) {
 
@@ -57,7 +57,7 @@ class SubstanceSdk {
 
     /**
      * Get available beacons of authenticated app
-     * @return Collection   Laravel collection of available beacons (https://laravel.com/docs/5.5/collections)
+     * @return  Collection      Laravel collection of available beacons (https://laravel.com/docs/5.5/collections)
      */
     public function getBeacons() {
 
@@ -70,11 +70,11 @@ class SubstanceSdk {
 
     /**
      * Connect a beacon with content
-     * @param  Beacon $beacon      Beacon to be connected to given URL
-     * @param  string $url         The URL that gets connected to the beacon, HTTPS preferred
-     * @param  string $title       The notification title for the Physical Web
-     * @param  string $description The notification description for the Phyiscal Web
-     * @return Beacon              The updated (connected) beacon
+     * @param  Substance\Models\Beacon  $beacon         Beacon to be connected to given URL
+     * @param  string                   $url            The URL that gets connected to the beacon, HTTPS preferred
+     * @param  string                   $title          The notification title for the Physical Web
+ * @param  string                       $description    The notification description for the Phyiscal Web
+     * @return Substance\Models\Beacon                  The updated (connected) beacon
      */
     public function connectContent(Beacon $beacon,string $url,string $title,string $description) {
 
@@ -86,8 +86,8 @@ class SubstanceSdk {
 
     /**
      * Disconnect content from a beacon
-     * @param  Beacon $beacon      Beacon to be disconnected
-     * @return Beacon              The updated (disconnected) beacon
+     * @param  Substance\Models\Beacon  $beacon         Beacon to be disconnected
+     * @return Substance\Models\Beacon                  The updated (disconnected) beacon
      */
     public function disconnectContent(Beacon $beacon) {
 

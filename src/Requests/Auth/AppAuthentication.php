@@ -1,17 +1,13 @@
 <?php
 
-namespace Substance\Auth;
+namespace Substance\Requests\Auth;
 
-use GuzzleHttp\Client;
 use Substance\SubstanceConstants;
 use Substance\Exceptions\AppKeyValidationException;
 use Substance\Exceptions\AppSecretValidationException;
-use Substance\Exceptions\AppAuthenticationFailedException;
-use Substance\Traits\GetsHttpClient;
+use Substance\Requests\SubstanceRequest;
 
-class AppAuthentication {
-
-    use GetsHttpClient;
+class AppAuthentication extends SubstanceRequest {
 
     /**
      * JWT token
@@ -39,8 +35,8 @@ class AppAuthentication {
 
     /**
      * Create new AppAuthentication instance
-     * @param string $appKey    Substance app key
-     * @param string $appSecret Substance app secret
+     * @param   string  $appKey     Substance app key
+     * @param   string  $appSecret  Substance app secret
      */
     public function __construct(string $appKey, string $appSecret) {
 
@@ -51,8 +47,8 @@ class AppAuthentication {
 
     /**
      * Get the JWT token for authentication
-     * @param  boolean $withBearer  Prepends the "Bearer " string for HTTP auth header
-     * @return string               JWT token with or without Bearer prefix
+     * @param   boolean     $withBearer     Prepends the "Bearer " string for HTTP auth header
+     * @return  string                      JWT token with or without Bearer prefix
      */
     public function getToken($withBearer = true) {
 
@@ -65,7 +61,7 @@ class AppAuthentication {
 
     /**
      * Get a new JWT token for authentication
-     * @return void
+     * @return  void
      */
     public function login() {
 
@@ -76,13 +72,7 @@ class AppAuthentication {
             'secret' => $this->appSecret
         ];
 
-        try {
-            $response = $client->request('POST', SubstanceConstants::getAuthUrl(), [
-                'json' => $payload
-            ]);
-        } catch(\Exception $e) {
-            throw new AppAuthenticationFailedException($e->getMessage(),$e->getCode());
-        }
+        $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getAuthUrl(),'Substance\Exceptions\AppAuthenticationFailedException',$payload);
 
         $data = $this->decodeBody($response);
         $this->token = $data->data->token;
@@ -99,21 +89,9 @@ class AppAuthentication {
     }
 
     /**
-     * Decodes the Guzzle body
-     * @param  Response $response   Guzzle Response
-     * @return object               JSON decoded response body
-     */
-    private function decodeBody($response) {
-
-        $body = $response->getBody();
-        return json_decode($body->getContents());
-
-    }
-
-    /**
      * Set Substance app key
-     * @param string $appKey Susbtance app key
-     * @return void
+     * @param   string  $appKey     Susbtance app key
+     * @return  void
      */
     private function setAppKey(string $appKey) {
 
@@ -127,8 +105,8 @@ class AppAuthentication {
 
     /**
      * Set Substance app secret
-     * @param string $appSecret Susbtance app secret
-     * @return void
+     * @param   string  $appSecret  Susbtance app secret
+     * @return  void
      */
     private function setAppSecret(string $appSecret) {
 
