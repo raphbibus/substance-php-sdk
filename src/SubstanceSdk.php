@@ -83,8 +83,8 @@ class SubstanceSdk {
 
     /**
      * Disconnect content from a beacon
-     * @param  Substance\Models\Beacon  $beacon         Beacon to be disconnected
-     * @return Substance\Models\Beacon                  The updated (disconnected) beacon
+     * @param  Substance\Models\Beacon  $beacon Beacon to be disconnected
+     * @return Substance\Models\Beacon          The updated (disconnected) beacon
      */
     public function disconnectContent(Beacon $beacon) {
 
