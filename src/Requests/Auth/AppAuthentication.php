@@ -65,16 +65,15 @@ class AppAuthentication extends SubstanceRequest {
      */
     public function login() {
 
-        $client = $this->getClient('application/json');
-
         $payload = [
             'key' => $this->appKey,
             'secret' => $this->appSecret
         ];
 
+        $client = $this->getClient('application/json');
         $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getAuthUrl(),'Substance\Exceptions\AppAuthenticationFailedException',$payload);
-
         $data = $this->decodeBody($response);
+
         $this->token = $data->data->token;
         $this->authenticated = true;
 

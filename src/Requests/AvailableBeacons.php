@@ -28,9 +28,7 @@ class AvailableBeacons extends SubstanceRequest {
     public function get(string $token) {
 
         $client = $this->getClient(null,$token);
-
         $response = $this->getEndpointResponse($client,'GET',SubstanceConstants::getAvailableBeaconsUrl(),'Substance\Exceptions\AvailableBeaconsFailedException');
-
         $data = $this->decodeBody($response);
 
         foreach($data->data as $payloadItem) {

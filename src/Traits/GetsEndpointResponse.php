@@ -18,9 +18,7 @@ trait GetsEndpointResponse {
         try {
 
             if($payload) {
-                $response = $client->request($method, $endpoint, [
-                    'json' => $payload
-                ]);
+                $response = $client->request($method, $endpoint, ['json' => $payload]);
             } else {
                 $response = $client->request($method, $endpoint);
             }

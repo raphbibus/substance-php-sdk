@@ -18,10 +18,9 @@ class SubstanceConnector extends SubstanceRequest {
     public function connect(ContentConnection $contentConnection, string $token) {
 
         $client = $this->getClient('application/json',$token);
-
         $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getConnectBeaconUrl(),'Substance\Exceptions\ContentConnectionFailedException',$contentConnection->toPayload());
-
         $data = $this->decodeBody($response);
+
         $beacon = new Beacon($data->data);
         return $beacon;
 
@@ -36,10 +35,9 @@ class SubstanceConnector extends SubstanceRequest {
     public function disconnect(Beacon $beacon, string $token) {
 
         $client = $this->getClient('application/json',$token);
-
         $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getDisonnectBeaconUrl(),'Substance\Exceptions\DiscontentConnectionFailedException',$beacon->toPayload());
-
         $data = $this->decodeBody($response);
+
         $beacon = new Beacon($data->data);
         return $beacon;
 
