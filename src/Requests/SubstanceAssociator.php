@@ -18,7 +18,7 @@ class SubstanceAssociator extends SubstanceRequest {
     public function associate(ContentAssociation $contentAssociation, string $token) {
 
         $client = $this->getClient('application/json',$token);
-        $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getConnectBeaconUrl(),'Substance\Exceptions\ContentAssociationFailedException',$contentAssociation->toPayload());
+        $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getAssociateBeaconUrl(),'Substance\Exceptions\ContentAssociationFailedException',$contentAssociation->toPayload());
         $data = $this->decodeBody($response);
 
         $beacon = new Beacon($data->data);
@@ -35,7 +35,7 @@ class SubstanceAssociator extends SubstanceRequest {
     public function disassociate(Beacon $beacon, string $token) {
 
         $client = $this->getClient('application/json',$token);
-        $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getDisonnectBeaconUrl(),'Substance\Exceptions\DisassociateConnectionFailedException',$beacon->toPayload());
+        $response = $this->getEndpointResponse($client,'POST',SubstanceConstants::getDisassociateBeaconUrl(),'Substance\Exceptions\DisassociateConnectionFailedException',$beacon->toPayload());
         $data = $this->decodeBody($response);
 
         $beacon = new Beacon($data->data);
