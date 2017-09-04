@@ -5,24 +5,24 @@ namespace Substance\Models;
 use Substance\Models\Beacon;
 use Substance\Models\Content;
 
-class ContentConnection {
+class ContentAssociation {
 
     /**
-     * Connectable beacon
+     * Associatable beacon
      * @var Substance\Models\Beacon
      */
     private $beacon;
 
     /**
-     * Content that gets connected to the beacon
+     * Content that gets associated with the beacon
      * @var Substance\Models\Content
      */
     private $content;
 
     /**
-     * Create a new ContentConnection instance
-     * @param   Substance\Models\Beacon     $beacon      Connectable beacon
-     * @param   Substance\Models\Content    $content     Content that gets connected to the beacon
+     * Create a new ContentAssociation instance
+     * @param   Substance\Models\Beacon     $beacon      Associatable beacon
+     * @param   Substance\Models\Content    $content     Content that gets associated with the beacon
      */
     public function __construct(Beacon $beacon,Content $content) {
 

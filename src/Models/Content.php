@@ -9,7 +9,7 @@ use Substance\Exceptions\DescriptionValidationException;
 class Content {
 
     /**
-     * Content URL that gets connected to the beacon
+     * Content URL that gets associated wtih the beacon
      * @var string
      */
     private $url;
@@ -28,7 +28,7 @@ class Content {
 
     /**
      * Create a new Content instance
-     * @param   string  $url         Content URL that gets connected to the beacon
+     * @param   string  $url         Content URL that gets associated wtih the beacon
      * @param   string  $title       Notification title
      * @param   string  $description Notification description
      */

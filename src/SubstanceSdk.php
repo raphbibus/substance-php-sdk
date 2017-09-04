@@ -4,10 +4,10 @@ namespace Substance;
 
 use Substance\SubstanceConstants;
 use Substance\Requests\AvailableBeacons;
-use Substance\Requests\SubstanceConnector;
+use Substance\Requests\SubstanceAssociator;
 use Substance\Models\Beacon;
 use Substance\Models\Content;
-use Substance\Models\ContentConnection;
+use Substance\Models\ContentAssociation;
 use Substance\Requests\Auth\AppAuthentication;
 
 class SubstanceSdk {
@@ -74,10 +74,10 @@ class SubstanceSdk {
      * @param  Substance\Models\ContentConnection   $contentConnection  The content and beacon connection to be created in Substance
      * @return Substance\Models\Beacon                                  The updated (connected) beacon
      */
-    public function connectContent(ContentConnection $contentConnection) {
+    public function connectContent(ContentAssociation $contentAssociation) {
 
-        $substanceConnector = new SubstanceConnector();
-        return $substanceConnector->connect($contentConnection,$this->appAuthentication->getToken());
+        $substanceAssociator = new SubstanceAssociator();
+        return $substanceAssociator->associate($contentAssociation,$this->appAuthentication->getToken());
 
     }
 
@@ -88,8 +88,8 @@ class SubstanceSdk {
      */
     public function disconnectContent(Beacon $beacon) {
 
-        $substanceConnector = new SubstanceConnector();
-        return $substanceConnector->disconnect($beacon,$this->appAuthentication->getToken());
+        $substanceAssociator = new SubstanceAssociator();
+        return $substanceAssociator->disassociate($beacon,$this->appAuthentication->getToken());
 
     }
 

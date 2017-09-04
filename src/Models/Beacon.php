@@ -23,10 +23,10 @@ class Beacon {
     private $alias;
 
     /**
-     * Connected with content status
+     * Associated with content status
      * @var boolean
      */
-    private $connected;
+    private $associated;
 
     /**
      * Create a new Beacon instance
@@ -37,7 +37,7 @@ class Beacon {
         $this->id = $payloadItem->id;
         $this->name = $payloadItem->name;
         $this->alias = $payloadItem->alias;
-        $this->connected = $payloadItem->connected;
+        $this->associated = $payloadItem->associated;
 
     }
 
@@ -63,12 +63,12 @@ class Beacon {
         return $this->alias;
     }
 
-    public function getConnected() {
+    public function getAssociated() {
         return $this->connected;
     }
 
-    public function setConnected(boolean $connected) {
-        $this->connected = $connected;
+    public function setAssociated(boolean $associated) {
+        $this->associated = $associated;
     }
 
 }
