@@ -9,6 +9,7 @@ use Substance\Models\Beacon;
 use Substance\Models\Content;
 use Substance\Models\ContentAssociation;
 use Substance\Requests\Auth\AppAuthentication;
+use Substance\Exceptions\NotAuthenticatedException;
 
 class SubstanceSdk {
 
@@ -62,9 +63,12 @@ class SubstanceSdk {
      */
     public function getBeacons() {
 
+        $this->checkAuth();
+
         if($this->availableBeacons == null) {
             $this->availableBeacons = new AvailableBeacons();
         }
+
         return $this->availableBeacons->get($this->appAuthentication->getToken());
 
     }
@@ -76,6 +80,7 @@ class SubstanceSdk {
      */
     public function associateContent(ContentAssociation $contentAssociation) {
 
+        $this->checkAuth();
         $substanceAssociator = new SubstanceAssociator();
         return $substanceAssociator->associate($contentAssociation,$this->appAuthentication->getToken());
 
@@ -88,9 +93,14 @@ class SubstanceSdk {
      */
     public function disassociateContent(Beacon $beacon) {
 
+        $this->checkAuth();
         $substanceAssociator = new SubstanceAssociator();
         return $substanceAssociator->disassociate($beacon,$this->appAuthentication->getToken());
 
+    }
+
+    private function checkAuth() {
+        if(!$this->appAuthentication->isAuthenticated()) throw new NotAuthenticatedException();
     }
 
 }

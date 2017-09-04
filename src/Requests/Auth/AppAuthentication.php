@@ -42,6 +42,7 @@ class AppAuthentication extends SubstanceRequest {
 
         $this->setAppKey($appKey);
         $this->setAppSecret($appSecret);
+        $this->login();
 
     }
 
