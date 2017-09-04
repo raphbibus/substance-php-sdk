@@ -74,7 +74,7 @@ class SubstanceSdk {
      * @param  Substance\Models\ContentConnection   $contentConnection  The content and beacon connection to be created in Substance
      * @return Substance\Models\Beacon                                  The updated (connected) beacon
      */
-    public function connectContent(ContentAssociation $contentAssociation) {
+    public function associateContent(ContentAssociation $contentAssociation) {
 
         $substanceAssociator = new SubstanceAssociator();
         return $substanceAssociator->associate($contentAssociation,$this->appAuthentication->getToken());
@@ -86,7 +86,7 @@ class SubstanceSdk {
      * @param  Substance\Models\Beacon  $beacon Beacon to be disconnected
      * @return Substance\Models\Beacon          The updated (disconnected) beacon
      */
-    public function disconnectContent(Beacon $beacon) {
+    public function disassociateContent(Beacon $beacon) {
 
         $substanceAssociator = new SubstanceAssociator();
         return $substanceAssociator->disassociate($beacon,$this->appAuthentication->getToken());
