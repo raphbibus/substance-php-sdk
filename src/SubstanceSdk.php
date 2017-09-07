@@ -9,9 +9,11 @@ use Substance\Models\Beacon;
 use Substance\Models\Content;
 use Substance\Models\ContentAssociation;
 use Substance\Requests\Auth\AppAuthentication;
-use Substance\Exceptions\NotAuthenticatedException;
+use Substance\Traits\ChecksAuth;
 
 class SubstanceSdk {
+
+    use ChecksAuth;
 
     /**
      * Substance app key - Create a new app in Substance -> Admin -> Apps -> New
@@ -97,10 +99,6 @@ class SubstanceSdk {
         $substanceAssociator = new SubstanceAssociator();
         return $substanceAssociator->disassociate($beacon,$this->appAuthentication->getToken());
 
-    }
-
-    private function checkAuth() {
-        if(!$this->appAuthentication->isAuthenticated()) throw new NotAuthenticatedException();
     }
 
 }
