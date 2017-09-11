@@ -4,9 +4,9 @@ namespace Substance;
 
 class SubstanceConstants {
 
-    // const SUBSTANCE_API_URL = "https://substance.rakete7.com/api/";
+    const SUBSTANCE_API_URL = "https://substance.rakete7.com/api/";
 
-    const SUBSTANCE_API_URL = "http://substance.app/api/";
+    // const SUBSTANCE_API_URL = "http://substance.app/api/";
 
     const AUTH_NAMESPACE = "auth/login/apps";
 
