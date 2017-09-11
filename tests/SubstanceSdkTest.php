@@ -20,8 +20,8 @@ use Substance\Exceptions\DescriptionValidationException;
 final class SubstanceSdkTest extends TestCase {
 
     private $faker;
-    private $validAppKey = '75ad228a6df77254347ebe7d0dbd8e205d9ce101';
-    private $validAppSecret = '8e4e4d5b8a8f1b68b68470995b084f61859df394';
+    private $validAppKey = 'valid_app_key';
+    private $validAppSecret = 'valid_app_secret';
 
     public function __construct() {
         $this->faker = Faker\Factory::create();
